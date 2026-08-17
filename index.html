@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>prlauncher | resmi olmayan üçüncü taraf Minecraft launcher'ı</title>
+<meta name="description" content="prlauncher — hafif, hızlı, açık kaynak, resmi olmayan üçüncü taraf Minecraft launcher'ı.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#16141a;
+    --bg-elev:#1e1b23;
+    --bg-elev-2:#28232d;
+    --ink:#efe9dd;
+    --ink-dim:#9c9587;
+    --ink-faint:#6b6660;
+    --amber:#e2a33d;
+    --amber-dim:#8a6526;
+    --lapis:#5b8ab8;
+    --lapis-dim:#33506b;
+    --border:#37323d;
+    --border-soft:#2a2630;
+    --radius:2px;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --display:'Silkscreen', ui-monospace, monospace;
+    --sans:'Inter', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  ::selection{background:var(--amber);color:#1a1408;}
+
+  /* background chunk-grid texture */
+  .bg-grid{
+    position:fixed;inset:0;z-index:-1;
+    background-image:
+      linear-gradient(var(--border-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:.35;
+    mask-image:radial-gradient(ellipse 900px 600px at 50% 0%, black, transparent);
+  }
+
+  /* nav */
+  header{
+    position:sticky;top:0;z-index:20;
+    background:rgba(22,20,26,.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:15px;letter-spacing:.5px;}
+  .cube{width:20px;height:20px;position:relative;}
+  .cube i{position:absolute;width:10px;height:10px;}
+  .cube .top{background:var(--amber);top:0;left:5px;transform:skew(-30deg,-15deg) scale(1,.87);}
+  .cube .left{background:var(--amber-dim);bottom:0;left:0;transform:skew(0,26deg) scale(1,.87);}
+  .cube .right{background:#c98a30;bottom:0;left:10px;transform:skew(0,-26deg) scale(1,.87);}
+  .navlinks{display:flex;gap:28px;font-size:14px;color:var(--ink-dim);}
+  .navlinks a{text-decoration:none;transition:color .15s;}
+  .navlinks a:hover{color:var(--ink);}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 20px;
+    font-family:var(--sans);font-weight:600;font-size:14px;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    text-decoration:none;
+    cursor:pointer;
+    transition:transform .12s, border-color .12s, background .12s;
+  }
+  .btn:active{transform:translateY(2px);}
+  .btn-primary{background:var(--amber);color:#1a1408;border-color:var(--amber);}
+  .btn-primary:hover{background:#eeb154;}
+  .btn-ghost{background:transparent;color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink-dim);}
+  .btn-sm{padding:8px 14px;font-size:13px;}
+
+  /* hero */
+  .hero{padding:96px 0 80px;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--amber);
+    border:1px solid var(--amber-dim);
+    padding:5px 10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:6px;height:6px;background:var(--amber);}
+  h1{
+    font-family:var(--display);
+    font-size:42px;
+    line-height:1.28;
+    margin:0 0 20px;
+    letter-spacing:.5px;
+  }
+  h1 .accent{color:var(--amber);}
+  .hero p.lead{
+    font-size:16px;color:var(--ink-dim);max-width:46ch;margin:0 0 32px;
+  }
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
+  .hero-meta{display:flex;gap:20px;font-family:var(--mono);font-size:12px;color:var(--ink-faint);flex-wrap:wrap;}
+  .hero-meta span{display:flex;align-items:center;gap:6px;}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--ink-faint);}
+  .dot.live{background:#6bc07a;}
+
+  /* launcher mockup */
+  .mockup{
+    background:var(--bg-elev);
+    border:1px solid var(--border);
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+    line-height:0;
+  }
+  .mockup-shot{width:100%;display:block;}
+
+  section{padding:72px 0;}
+  .section-head{max-width:56ch;margin-bottom:44px;}
+  .section-eyebrow{font-family:var(--mono);font-size:12px;color:var(--lapis);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+  h2{font-family:var(--display);font-size:26px;margin:0 0 12px;letter-spacing:.3px;}
+  .section-head p{color:var(--ink-dim);font-size:15px;margin:0;}
+
+  .features{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    border:1px solid var(--border);
+  }
+  .feature{
+    padding:26px 24px;
+    border-right:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+  .features .feature:nth-child(2n){border-right:none;}
+  .features .feature:nth-last-child(-n+2){border-bottom:none;}
+  .feature .icon{width:26px;height:26px;margin-bottom:16px;}
+  .feature h3{font-size:15px;margin:0 0 8px;font-weight:700;}
+  .feature p{font-size:13.5px;color:var(--ink-dim);margin:0;}
+
+  .steps{border-top:1px solid var(--border);}
+  .step{
+    display:grid;grid-template-columns:64px 1fr;gap:20px;
+    padding:26px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .step-num{font-family:var(--display);font-size:22px;color:var(--amber-dim);}
+  .step h3{margin:0 0 6px;font-size:15px;}
+  .step p{margin:0;color:var(--ink-dim);font-size:13.5px;max-width:60ch;}
+
+  .cta-band{
+    background:var(--bg-elev);
+    border:1px solid var(--border);
+    padding:48px 40px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+    flex-wrap:wrap;
+  }
+  .cta-band h2{margin:0 0 8px;}
+  .cta-band p{color:var(--ink-dim);margin:0;font-size:14px;}
+
+  .disclaimer{
+    background:var(--bg-elev-2);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:16px 0;
+    font-family:var(--mono);font-size:12px;color:var(--ink-faint);
+    text-align:center;
+  }
+  .disclaimer b{color:var(--ink-dim);}
+
+  footer{padding:44px 0;}
+  .foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .foot-links{display:flex;gap:22px;font-size:13px;color:var(--ink-dim);}
+  .foot-links a{text-decoration:none;}
+  .foot-links a:hover{color:var(--ink);}
+  .foot-small{font-family:var(--mono);font-size:11px;color:var(--ink-faint);}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .features{grid-template-columns:1fr;}
+    .features .feature{border-right:none;}
+    h1{font-size:32px;}
+    .navlinks{display:none;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="brand">
+        <div class="cube"><i class="top"></i><i class="left"></i><i class="right"></i></div>
+        prlauncher
+      </div>
+      <div class="navlinks">
+        <a href="#ozellikler">Özellikler</a>
+        <a href="#kurulum">Kurulum</a>
+        <a href="https://github.com/prlauncherofficial-bot/prlauncher">GitHub</a>
+      </div>
+      <a class="btn btn-primary btn-sm" href="#indir">İndir</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Resmi olmayan · üçüncü taraf · ilk sürüm</div>
+        <h1>Sade, <span class="accent">kişiselleştirilebilir</span> bir Minecraft launcher'ı.</h1>
+        <p class="lead">prlauncher; Fabric ve Forge desteği, sade bir ayar menüsü ve ely.by desteğiyle gelen, üzerine az düşünmeden kullanabileceğin bir launcher. Henüz ilk sürümü — sırayla büyüyor.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" id="indir" href="https://github.com/prlauncherofficial-bot/prlauncher/releases">İndir — Windows</a>
+          <a class="btn btn-ghost" href="https://github.com/prlauncherofficial-bot/prlauncher">GitHub</a>
+        </div>
+        <div class="hero-meta">
+          <span><span class="dot live"></span> İlk sürüm</span>
+          <span><span class="dot"></span> Fabric &amp; Forge desteği</span>
+          <span><span class="dot"></span> Mojang/Microsoft ile bağlantısı yoktur</span>
+        </div>
+      </div>
+
+      <div class="mockup">
+        <img class="mockup-shot" src="assets/launcher-screenshot.png" alt="prlauncher arayüzü — kullanıcı adı, ely.by parola alanı, sürüm seçimi ve Oyna butonu">
+      </div>
+    </div>
+  </section>
+
+  <section id="ozellikler">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Özellikler</div>
+        <h2>İlk sürüm, net özellikler.</h2>
+        <p>prlauncher büyük vaatlerle gelmiyor — şu an elinde olan dört şeyi iyi yapmaya çalışıyor.</p>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="var(--lapis)" stroke-width="1.6"><path d="M12 3l7 4v10l-7 4-7-4V7z"/><path d="M12 12l7-4M12 12v9M12 12L5 8"/></svg>
+          <h3>Fabric &amp; Forge desteği</h3>
+          <p>İki yaygın mod yükleyicisiyle de doğrudan çalışır.</p>
+        </div>
+        <div class="feature">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.6"><path d="M4 17V7a2 2 0 012-2h5l2 2h5a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2z"/></svg>
+          <h3>Sade ayar menüsü</h3>
+          <p>Karmaşık alt menüler yok — bulman gereken ayar hep bir tık ötede.</p>
+        </div>
+        <div class="feature">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#6bc07a" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          <h3>Kişiselleştirilebilir</h3>
+          <p>Arayüzü kendi zevkine göre şekillendirebilirsin.</p>
+        </div>
+        <div class="feature">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="var(--lapis)" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          <h3>ely.by desteği</h3>
+          <p>Microsoft hesabı dışında ely.by hesabınla da giriş yapabilirsin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kurulum">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Kurulum</div>
+        <h2>Dört adımda oyunda ol.</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div><h3>İndir</h3><p>GitHub'daki Releases sayfasından işletim sistemine uygun sürümü indir.</p></div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div><h3>Çalıştır</h3><p>Kurulum gerektirmez — çalıştırılabilir dosyayı aç ve launcher başlasın.</p></div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div><h3>Hesabınla giriş yap</h3><p>Microsoft hesabınla veya ely.by hesabınla oturum aç.</p></div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div><h3>İlk instance'ını oluştur</h3><p>Sürümünü seç, istersen bir mod yükleyici ekle, Oyna'ya bas.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h2>Hazır mısın?</h2>
+          <p>prlauncher ücretsiz, ilk sürümüyle şu an burada. Fabric ve Forge desteğiyle sade bir deneyim sunuyor.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn-primary" href="https://github.com/prlauncherofficial-bot/prlauncher/releases">İndir</a>
+          <a class="btn btn-ghost" href="https://github.com/prlauncherofficial-bot/prlauncher">GitHub'da incele</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="disclaimer">
+  <div class="wrap">
+    prlauncher, <b>Mojang Studios</b> veya <b>Microsoft</b> tarafından onaylanmamıştır ve onlarla bağlantılı değildir. Bağımsız, resmi olmayan bir üçüncü taraf projesidir.
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="brand">
+      <div class="cube"><i class="top"></i><i class="left"></i><i class="right"></i></div>
+      prlauncher
+    </div>
+    <div class="foot-links">
+      <a href="#ozellikler">Özellikler</a>
+      <a href="#kurulum">Kurulum</a>
+      <a href="https://github.com/prlauncherofficial-bot/prlauncher">GitHub</a>
+      <a href="https://github.com/prlauncherofficial-bot/prlauncher/issues">Sorun bildir</a>
+    </div>
+    <div class="foot-small">© 2026 prlauncher</div>
+  </div>
+</footer>
+
+</body>
+</html>
