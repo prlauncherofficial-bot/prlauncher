@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>prlauncher | resmi olmayan üçüncü taraf Minecraft launcher'ı</title>
-<meta name="description" content="prlauncher — hafif, hızlı, açık kaynak, resmi olmayan üçüncü taraf Minecraft launcher'ı.">
+<title>prlauncher | an unofficial third-party Minecraft launcher</title>
+<meta name="description" content="prlauncher — a lightweight, unofficial third-party Minecraft launcher.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -41,7 +41,6 @@
   .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
   ::selection{background:var(--amber);color:#1a1408;}
 
-  /* background chunk-grid texture */
   .bg-grid{
     position:fixed;inset:0;z-index:-1;
     background-image:
@@ -52,7 +51,6 @@
     mask-image:radial-gradient(ellipse 900px 600px at 50% 0%, black, transparent);
   }
 
-  /* nav */
   header{
     position:sticky;top:0;z-index:20;
     background:rgba(22,20,26,.88);
@@ -86,7 +84,6 @@
   .btn-ghost:hover{border-color:var(--ink-dim);}
   .btn-sm{padding:8px 14px;font-size:13px;}
 
-  /* hero */
   .hero{padding:96px 0 80px;}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
   .eyebrow{
@@ -115,7 +112,6 @@
   .dot{width:6px;height:6px;border-radius:50%;background:var(--ink-faint);}
   .dot.live{background:#6bc07a;}
 
-  /* launcher mockup */
   .mockup{
     background:var(--bg-elev);
     border:1px solid var(--border);
@@ -207,11 +203,11 @@
         prlauncher
       </div>
       <div class="navlinks">
-        <a href="#ozellikler">Özellikler</a>
-        <a href="#kurulum">Kurulum</a>
+        <a href="#features">Features</a>
+        <a href="#install">Install</a>
         <a href="https://github.com/prlauncherofficial-bot/prlauncher">GitHub</a>
       </div>
-      <a class="btn btn-primary btn-sm" href="#indir">İndir</a>
+      <a class="btn btn-primary btn-sm" href="#download">Download</a>
     </nav>
   </div>
 </header>
@@ -220,80 +216,80 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow">Resmi olmayan · üçüncü taraf · ilk sürüm</div>
-        <h1>Sade, <span class="accent">kişiselleştirilebilir</span> bir Minecraft launcher'ı.</h1>
-        <p class="lead">prlauncher; Fabric ve Forge desteği, sade bir ayar menüsü ve ely.by desteğiyle gelen, üzerine az düşünmeden kullanabileceğin bir launcher. Henüz ilk sürümü — sırayla büyüyor.</p>
+        <div class="eyebrow">Unofficial · third-party · first release</div>
+        <h1>A simple, <span class="accent">customizable</span> Minecraft launcher.</h1>
+        <p class="lead">prlauncher comes with Fabric and Forge support, a straightforward settings menu, and ely.by support — a launcher you don't have to think twice about. This is the first release, and it's growing step by step.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" id="indir" href="https://github.com/prlauncherofficial-bot/prlauncher/releases">İndir — Windows</a>
+          <a class="btn btn-primary" id="download" href="https://github.com/prlauncherofficial-bot/prlauncher/releases">Download — Windows</a>
           <a class="btn btn-ghost" href="https://github.com/prlauncherofficial-bot/prlauncher">GitHub</a>
         </div>
         <div class="hero-meta">
-          <span><span class="dot live"></span> İlk sürüm</span>
-          <span><span class="dot"></span> Fabric &amp; Forge desteği</span>
-          <span><span class="dot"></span> Mojang/Microsoft ile bağlantısı yoktur</span>
+          <span><span class="dot live"></span> First release</span>
+          <span><span class="dot"></span> Fabric &amp; Forge support</span>
+          <span><span class="dot"></span> Not affiliated with Mojang/Microsoft</span>
         </div>
       </div>
 
       <div class="mockup">
-        <img class="mockup-shot" src="launcher-screenshot.png" alt="prlauncher arayüzü — kullanıcı adı, ely.by parola alanı, sürüm seçimi ve Oyna butonu">
+        <img class="mockup-shot" src="launcher-screenshot.png" alt="prlauncher interface — username field, ely.by password field, version selector and play button">
       </div>
     </div>
   </section>
 
-  <section id="ozellikler">
+  <section id="features">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-eyebrow">Özellikler</div>
-        <h2>İlk sürüm, net özellikler.</h2>
-        <p>prlauncher büyük vaatlerle gelmiyor — şu an elinde olan dört şeyi iyi yapmaya çalışıyor.</p>
+        <div class="section-eyebrow">Features</div>
+        <h2>First release, honest feature set.</h2>
+        <p>prlauncher doesn't ship with big promises — just four things it tries to do well, right now.</p>
       </div>
       <div class="features">
         <div class="feature">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="var(--lapis)" stroke-width="1.6"><path d="M12 3l7 4v10l-7 4-7-4V7z"/><path d="M12 12l7-4M12 12v9M12 12L5 8"/></svg>
-          <h3>Fabric &amp; Forge desteği</h3>
-          <p>İki yaygın mod yükleyicisiyle de doğrudan çalışır.</p>
+          <h3>Fabric &amp; Forge support</h3>
+          <p>Works directly with both of the most common mod loaders.</p>
         </div>
         <div class="feature">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.6"><path d="M4 17V7a2 2 0 012-2h5l2 2h5a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2z"/></svg>
-          <h3>Sade ayar menüsü</h3>
-          <p>Karmaşık alt menüler yok — bulman gereken ayar hep bir tık ötede.</p>
+          <h3>Simple settings menu</h3>
+          <p>No maze of submenus — the setting you need is always one click away.</p>
         </div>
         <div class="feature">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#6bc07a" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-          <h3>Kişiselleştirilebilir</h3>
-          <p>Arayüzü kendi zevkine göre şekillendirebilirsin.</p>
+          <h3>Customizable</h3>
+          <p>Shape the interface to fit your own taste.</p>
         </div>
         <div class="feature">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="var(--lapis)" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-          <h3>ely.by desteği</h3>
-          <p>Microsoft hesabı dışında ely.by hesabınla da giriş yapabilirsin.</p>
+          <h3>ely.by support</h3>
+          <p>Sign in with your ely.by account, alongside your Microsoft account.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="kurulum">
+  <section id="install">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-eyebrow">Kurulum</div>
-        <h2>Dört adımda oyunda ol.</h2>
+        <div class="section-eyebrow">Install</div>
+        <h2>Four steps to get playing.</h2>
       </div>
       <div class="steps">
         <div class="step">
           <div class="step-num">01</div>
-          <div><h3>İndir</h3><p>GitHub'daki Releases sayfasından işletim sistemine uygun sürümü indir.</p></div>
+          <div><h3>Download</h3><p>Grab the build for your OS from the Releases page on GitHub.</p></div>
         </div>
         <div class="step">
           <div class="step-num">02</div>
-          <div><h3>Çalıştır</h3><p>Kurulum gerektirmez — çalıştırılabilir dosyayı aç ve launcher başlasın.</p></div>
+          <div><h3>Run it</h3><p>No installer needed — open the executable and the launcher starts.</p></div>
         </div>
         <div class="step">
           <div class="step-num">03</div>
-          <div><h3>Hesabınla giriş yap</h3><p>Microsoft hesabınla veya ely.by hesabınla oturum aç.</p></div>
+          <div><h3>Sign in</h3><p>Log in with your Microsoft account or your ely.by account.</p></div>
         </div>
         <div class="step">
           <div class="step-num">04</div>
-          <div><h3>İlk instance'ını oluştur</h3><p>Sürümünü seç, istersen bir mod yükleyici ekle, Oyna'ya bas.</p></div>
+          <div><h3>Create your first instance</h3><p>Pick a version, add a mod loader if you want one, hit Play.</p></div>
         </div>
       </div>
     </div>
@@ -303,12 +299,12 @@
     <div class="wrap">
       <div class="cta-band">
         <div>
-          <h2>Hazır mısın?</h2>
-          <p>prlauncher ücretsiz, ilk sürümüyle şu an burada. Fabric ve Forge desteğiyle sade bir deneyim sunuyor.</p>
+          <h2>Ready to go?</h2>
+          <p>prlauncher is free, and this is its first release. Fabric and Forge support, kept simple.</p>
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="btn btn-primary" href="https://github.com/prlauncherofficial-bot/prlauncher/releases">İndir</a>
-          <a class="btn btn-ghost" href="https://github.com/prlauncherofficial-bot/prlauncher">GitHub'da incele</a>
+          <a class="btn btn-primary" href="https://github.com/prlauncherofficial-bot/prlauncher/releases">Download</a>
+          <a class="btn btn-ghost" href="https://github.com/prlauncherofficial-bot/prlauncher">View on GitHub</a>
         </div>
       </div>
     </div>
@@ -317,7 +313,7 @@
 
 <div class="disclaimer">
   <div class="wrap">
-    prlauncher, <b>Mojang Studios</b> veya <b>Microsoft</b> tarafından onaylanmamıştır ve onlarla bağlantılı değildir. Bağımsız, resmi olmayan bir üçüncü taraf projesidir.
+    prlauncher is not approved by or affiliated with <b>Mojang Studios</b> or <b>Microsoft</b>. It is an independent, unofficial third-party project.
   </div>
 </div>
 
@@ -328,10 +324,10 @@
       prlauncher
     </div>
     <div class="foot-links">
-      <a href="#ozellikler">Özellikler</a>
-      <a href="#kurulum">Kurulum</a>
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
       <a href="https://github.com/prlauncherofficial-bot/prlauncher">GitHub</a>
-      <a href="https://github.com/prlauncherofficial-bot/prlauncher/issues">Sorun bildir</a>
+      <a href="https://github.com/prlauncherofficial-bot/prlauncher/issues">Report an issue</a>
     </div>
     <div class="foot-small">© 2026 prlauncher</div>
   </div>
